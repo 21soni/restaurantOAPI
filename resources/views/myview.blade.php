@@ -49,6 +49,9 @@
 
       <div class="languages d-none d-md-flex align-items-center">
         <ul>
+          @auth
+            <li><a href="{{ url("logout") }}">Déconnexion</a></li>
+          @endauth
           <li>En</li>
           <li><a href="#">De</a></li>
         </ul>
@@ -94,8 +97,13 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="/register" class="book-a-table-btn scrollto d-none d-lg-flex">Commander un plat</a>
-
+      @auth
+      <li class="nav-item dropdown">
+        <a href="/profile" class="book-a-table-btn scrollto d-none d-lg-flex">{{Auth::user()->name}}</a>
+      @endauth
+      @guest
+      <a href="/login" class="book-a-table-btn scrollto d-none d-lg-flex">Commander un plat</a>
+      @endguest
     </div>
   </header><!-- End Header -->
 
