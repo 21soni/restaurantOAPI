@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,9 +27,7 @@ Route::get('/register', function () {
     ]);
 });
 
-Route::get('/', function () {
-    return view('myview');
-});
+Route::get('/', [FrontController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -46,3 +45,26 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/welcome', action:'HomeController@index');
+
+
+//=============================Routes du panier============================
+
+Route::post('/add-to-cart/{id}', [
+    'uses'          => 'App\Http\Controllers\CartController@add',
+    'as'            => 'cart.add'
+]);
+
+Route::get('/show-cart', [
+    'uses'          => 'App\Http\Controllers\CartController@show',
+    'as'            => 'cart.show'
+]);
+
+Route::get('/checkout', [
+    'uses'          => 'App\Http\Controllers\CartController@checkout',
+    'as'            => 'checkout'
+]);
+
+Route::post('/new-order', [
+    'uses'          => 'App\Http\Controllers\CartController@newOrder',
+    'as'            => 'order.new'
+]);

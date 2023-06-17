@@ -46,9 +46,15 @@
         <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
         <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Ven: 11AM - 23PM</span></i>
       </div>
-
       <div class="languages d-none d-md-flex align-items-center">
         <ul>
+          @if($cart_count > 0)
+          <li><a href="#">Panier ({{$cart_count}})</a></li>
+          <div class="dropdown-cart-action">
+              <a href="{{route('cart.show')}}" class="btn btn-primary">Voir le panier</a>
+              <a href="{{route('checkout')}}" class="btn btn-outline-primary-2"><span>Passer à la caisse</span><i class="icon-long-arrow-right"></i></a>
+          </div><!-- End .dropdown-cart-total -->
+          @endif
           @auth
             <li><a href="{{ url("logout") }}">Déconnexion</a></li>
           @endauth
@@ -111,6 +117,13 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
       <div class="row">
+        @if ( Session::has('message') )
+
+        <div class="alert {{ Session::get('flash_type') }}">
+            <h3>{{ Session::get('flash_message') }}</h3>
+        </div>
+
+        @endif
         <div class="col-lg-8">
           <h1>Bienvenue à <span> OAPI Restaurant</span></h1>
           <h2>Procurant de succulents mets depuis plus de 23 ans!</h2>
@@ -225,92 +238,218 @@
 
           <div class="col-lg-6 menu-item filter-starters">
             <img src="assets/img/menu/lobster-bisque.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Lobster Bisque</a><span>$5.95</span>
+              <a href="#">Lobster Bisque</a><span>500F</span>
             </div>
             <div class="menu-ingredients">
               Lorem, deren, trataro, filede, nerada
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 1])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-specialty">
             <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Bread Barrel</a><span>$6.95</span>
+              <a href="#">Bread Barrel</a><span>600F</span>
             </div>
             <div class="menu-ingredients">
               Lorem, deren, trataro, filede, nerada
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 2])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-starters">
             <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Crab Cake</a><span>$7.95</span>
+              <a href="#">Crab Cake</a><span>700F</span>
             </div>
             <div class="menu-ingredients">
               A delicate crab cake served on a toasted roll with lettuce and tartar sauce
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 3])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-salads">
             <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Caesar Selections</a><span>$8.95</span>
+              <a href="#">Caesar Selections</a><span>800F</span>
             </div>
             <div class="menu-ingredients">
               Lorem, deren, trataro, filede, nerada
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 4])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-specialty">
             <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Tuscan Grilled</a><span>$9.95</span>
+              <a href="#">Tuscan Grilled</a><span>900F</span>
             </div>
             <div class="menu-ingredients">
               Grilled chicken with provolone, artichoke hearts, and roasted red pesto
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 5])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-starters">
             <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Mozzarella Stick</a><span>$4.95</span>
+              <a href="#">Mozzarella Stick</a><span>1000F</span>
             </div>
             <div class="menu-ingredients">
               Lorem, deren, trataro, filede, nerada
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 6])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-salads">
             <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Greek Salad</a><span>$9.95</span>
+              <a href="#">Greek Salad</a><span>1100F</span>
             </div>
             <div class="menu-ingredients">
               Fresh spinach, crisp romaine, tomatoes, and Greek olives
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 7])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-salads">
             <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Spinach Salad</a><span>$9.95</span>
+              <a href="#">Spinach Salad</a><span>1200F</span>
             </div>
             <div class="menu-ingredients">
               Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 8])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
           <div class="col-lg-6 menu-item filter-specialty">
             <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
+            <br>
             <div class="menu-content">
-              <a href="#">Lobster Roll</a><span>$12.95</span>
+              <a href="#">Lobster Roll</a><span>1300F</span>
             </div>
             <div class="menu-ingredients">
               Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
             </div>
+            <br>
+            <form action="{{route('cart.add', ['id' => 9])}}" method="post">
+                @csrf
+                <div class="col-md-4 product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required/>
+                        </div><!-- End .product-details-quantity --> 
+                        <br>
+                        <button type="submit" class="btn btn-outline-warning btn-block" style="height: 40px"><span>AJOUTER AU PANIER</span></button>
+                    </div><!-- End .details-action-col -->
+                </div><!-- End .product-details-action -->
+            </form>
           </div>
 
         </div>
